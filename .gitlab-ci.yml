@@ -1,0 +1,40 @@
+stages: [build, test]
+
+variables:
+  VCPKG_ROOT: "$CI_PROJECT_DIR/vcpkg"
+  VCPKG_BINARY_SOURCES: "clear;nuget,GitLab,readwrite"
+
+default:
+  image: ubuntu:24.04
+  cache:
+    key: vcpkg-$CI_COMMIT_REF_SLUG
+    paths:
+      - vcpkg/
+      - build/vcpkg_installed/
+
+before_script:
+  - apt-get update -qq && apt-get install -y clang-16 ninja-build cmake git
+  - git submodule update --init --recursive || true
+  - |
+    if [ ! -d "$VCPKG_ROOT" ]; then
+      git clone --depth=1 https://github.com/microsoft/vcpkg.git "$VCPKG_ROOT"
+      "$VCPKG_ROOT/bootstrap-vcpkg.sh"
+    fi
+  - $VCPKG_ROOT/vcpkg install fmt gtest --triplet=x64-linux
+
+build:
+  stage: build
+  script:
+    - ./build.sh
+  artifacts:
+    paths:
+      - build/
+
+test:
+  stage: test
+  needs: [build]
+  script:
+    - cd build && ctest --output-junit test_result.xml
+  artifacts:
+    reports:
+      junit: build/test_result.xml
