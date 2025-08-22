@@ -1,0 +1,12 @@
+/home/sakura/text/cpp-backend-roadmap/mini-stl/build/CMakeFiles/test_mini_vector.dir
+/home/sakura/text/cpp-backend-roadmap/mini-stl/build/CMakeFiles/test.dir
+/home/sakura/text/cpp-backend-roadmap/mini-stl/build/CMakeFiles/edit_cache.dir
+/home/sakura/text/cpp-backend-roadmap/mini-stl/build/CMakeFiles/rebuild_cache.dir
+/home/sakura/text/cpp-backend-roadmap/mini-stl/build/_deps/catch2-build/CMakeFiles/test.dir
+/home/sakura/text/cpp-backend-roadmap/mini-stl/build/_deps/catch2-build/CMakeFiles/edit_cache.dir
+/home/sakura/text/cpp-backend-roadmap/mini-stl/build/_deps/catch2-build/CMakeFiles/rebuild_cache.dir
+/home/sakura/text/cpp-backend-roadmap/mini-stl/build/_deps/catch2-build/src/CMakeFiles/Catch2.dir
+/home/sakura/text/cpp-backend-roadmap/mini-stl/build/_deps/catch2-build/src/CMakeFiles/Catch2WithMain.dir
+/home/sakura/text/cpp-backend-roadmap/mini-stl/build/_deps/catch2-build/src/CMakeFiles/test.dir
+/home/sakura/text/cpp-backend-roadmap/mini-stl/build/_deps/catch2-build/src/CMakeFiles/edit_cache.dir
+/home/sakura/text/cpp-backend-roadmap/mini-stl/build/_deps/catch2-build/src/CMakeFiles/rebuild_cache.dir
