@@ -38,3 +38,13 @@ test:
   artifacts:
     reports:
       junit: build/test_result.xml
+
+pages:
+  stage: deploy
+  image: alpine:latest
+  script:
+    - mkdir public
+    - cp -r docs/blog/* public/
+  artifacts:
+    paths: [public]
+  only: [main]
