@@ -1,7 +1,7 @@
 # CMake / vcpkg / build 产物
 build/
 vcpkg_installed/
-mini-stl/build/
+/mini-stl/
 CMakeCache.txt
 CMakeFiles/
 *.a

@@ -1,1 +1,0 @@
-/usr/bin/c++ CMakeFiles/test_mini_vector.dir/test/catch_main.cpp.o CMakeFiles/test_mini_vector.dir/test/test_mini_vector.cpp.o -o test_mini_vector  _deps/catch2-build/src/libCatch2Main.a _deps/catch2-build/src/libCatch2.a 
