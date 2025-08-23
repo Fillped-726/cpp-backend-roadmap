@@ -1,0 +1,29 @@
+Start testing: Aug 23 18:57 CST
+----------------------------------------------------------
+1/1 Testing: all
+1/1 Test: all
+Command: "/home/sakura/text/cpp-backend-roadmap/build/tests/test_main"
+Directory: /home/sakura/text/cpp-backend-roadmap/build/tests
+"all" start time: Aug 23 18:57 CST
+Output:
+----------------------------------------------------------
+Running main() from /home/sakura/vcpkg/buildtrees/gtest/src/v1.17.0-0c449efaff.clean/googletest/src/gtest_main.cc
+[==========] Running 1 test from 1 test suite.
+[----------] Global test environment set-up.
+[----------] 1 test from dummy
+[ RUN      ] dummy.always_pass
+[       OK ] dummy.always_pass (0 ms)
+[----------] 1 test from dummy (0 ms total)
+
+[----------] Global test environment tear-down
+[==========] 1 test from 1 test suite ran. (0 ms total)
+[  PASSED  ] 1 test.
+<end of output>
+Test time =   0.00 sec
+----------------------------------------------------------
+Test Passed.
+"all" end time: Aug 23 18:57 CST
+"all" time elapsed: 00:00:00
+----------------------------------------------------------
+
+End testing: Aug 23 18:57 CST

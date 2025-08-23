@@ -1,0 +1,1 @@
+/usr/bin/c++ -O3 -DNDEBUG CMakeFiles/app.dir/src/main.cpp.o -o app  /home/sakura/vcpkg/installed/x64-linux/lib/libfmt.a 
