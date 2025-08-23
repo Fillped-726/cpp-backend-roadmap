@@ -36,20 +36,20 @@ jobs:
       - name: Configure & Build mini-stl
         run: |
           # 清理旧的构建目录
-          rm -rf build
+          rm -rf mini-stl/build
           # 创建统一的构建目录
-          mkdir -p build
-          # 配置 CMake（源目录为 mini-stl，构建目录为 build）
-          cmake -S mini-stl -B build -G Ninja \
+          mkdir -p mini-stl/build
+          # 配置 CMake（源目录为 mini-stl，构建目录为 mini-stl/build）
+          cmake -S mini-stl -B mini-stl/build -G Ninja \
             -DCMAKE_TOOLCHAIN_FILE=$VCPKG_ROOT/scripts/buildsystems/vcpkg.cmake \
             -DCMAKE_BUILD_TYPE=Release
           # 并行编译
-          cmake --build build --parallel $(nproc)
+          cmake --build mini-stl/build --parallel $(nproc)
 
       - name: Run Tests
         run: |
           # 进入构建目录并运行测试
-          cd build
+          cd mini-stl/build
           ctest --output-on-failure --output-junit test_result.xml
 
       - name: Upload Test Report
@@ -57,4 +57,4 @@ jobs:
         if: always()
         with:
           name: mini-stl-test-report
-          path: build/test_result.xml
+          path: mini-stl/build/test_result.xml
