@@ -16,6 +16,7 @@ jobs:
       - uses: actions/checkout@v4
         with:
           submodules: recursive
+
       - name: Restore vcpkg cache
         uses: actions/cache@v4
         with:
@@ -23,25 +24,32 @@ jobs:
             vcpkg
             build/vcpkg_installed
           key: vcpkg-${{ runner.os }}-${{ hashFiles('vcpkg.json') }}
+
       - name: Install toolchain
         run: sudo apt-get update && sudo apt-get install -y clang-15 ninja-build cmake
+
       - name: Bootstrap vcpkg
         run: |
           [[ -d vcpkg ]] || git clone https://github.com/microsoft/vcpkg.git vcpkg
           ./vcpkg/bootstrap-vcpkg.sh
-      - name: Configure & Build
+
+      - name: Configure & Build mini-stl
         run: |
-          # 显式指定源目录为 mini-stl
-          cmake -B build -S mini-stl -G Ninja \
-            -DCMAKE_TOOLCHAIN_FILE=$VCPKG_ROOT/scripts/buildsystems/vcpkg.cmake
-          cmake --build build --parallel $(nproc)
-      - name: Build & Test mini-stl
-        run: |
-          cmake -S mini-stl -B mini-stl/build -G Ninja \
+          # 清理旧的构建目录
+          rm -rf build
+          # 创建统一的构建目录
+          mkdir -p build
+          # 配置 CMake（源目录为 mini-stl，构建目录为 build）
+          cmake -S mini-stl -B build -G Ninja \
             -DCMAKE_TOOLCHAIN_FILE=$VCPKG_ROOT/scripts/buildsystems/vcpkg.cmake \
             -DCMAKE_BUILD_TYPE=Release
-          cmake --build mini-stl/build --parallel
-          cd mini-stl/build
+          # 并行编译
+          cmake --build build --parallel $(nproc)
+
+      - name: Run Tests
+        run: |
+          # 进入构建目录并运行测试
+          cd build
           ctest --output-on-failure --output-junit test_result.xml
 
       - name: Upload Test Report
@@ -49,4 +57,4 @@ jobs:
         if: always()
         with:
           name: mini-stl-test-report
-          path: mini-stl/build/test_result.xml
+          path: build/test_result.xml
