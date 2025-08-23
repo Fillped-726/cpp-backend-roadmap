@@ -1,0 +1,69 @@
+name: CI
+
+on:
+  push:
+    branches: [ main, develop ]
+  pull_request:
+    branches: [ main ]
+
+env:
+  VCPKG_ROOT: ${{ github.workspace }}/vcpkg
+
+defaults:
+  run:
+    shell: bash
+
+jobs:
+  build-and-test:
+    runs-on: ubuntu-24.04
+
+    steps:
+    # 1. 检出源码 + 子模块
+    - name: Checkout
+      uses: actions/checkout@v4
+      with:
+        submodules: recursive   # 拉取 vcpkg 子模块
+
+    # 2. 安装系统依赖
+    - name: Install system packages
+      run: |
+        sudo apt-get update -qq
+        sudo apt-get install -y clang-16 ninja-build cmake pkg-config
+
+    # 3. 缓存 vcpkg 二进制
+    - name: Cache vcpkg
+      uses: actions/cache@v4
+      with:
+        path: |
+          vcpkg/installed/
+        key: vcpkg-${{ runner.os }}-${{ hashFiles('vcpkg.json') }}
+        restore-keys: |
+          vcpkg-${{ runner.os }}-
+
+    # 4. 安装 vcpkg 依赖
+    - name: Bootstrap & install ports
+      run: |
+        ./vcpkg/bootstrap-vcpkg.sh
+        ./vcpkg/vcpkg install fmt gtest --triplet=x64-linux
+
+    # 5. CMake 配置 & 构建
+    - name: Configure & Build
+      run: |
+        cmake -B build -G Ninja \
+          -DCMAKE_TOOLCHAIN_FILE=$VCPKG_ROOT/scripts/buildsystems/vcpkg.cmake \
+          -DCMAKE_BUILD_TYPE=Release
+        cmake --build build
+
+    # 6. 运行测试并上传结果
+    - name: Test
+      run: |
+        cd build
+        ctest --output-on-failure --output-junit test_result.xml
+
+    # 7. 上传测试报告（可选，供 PR 显示）
+    - name: Upload test results
+      uses: actions/upload-artifact@v4
+      if: always()
+      with:
+        name: junit-test-results
+        path: build/test_result.xml
