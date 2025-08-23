@@ -24,7 +24,7 @@ jobs:
             build/vcpkg_installed
           key: vcpkg-${{ runner.os }}-${{ hashFiles('vcpkg.json') }}
       - name: Install toolchain
-        run: sudo apt-get update && sudo apt-get install -y clang-16 ninja-build cmake
+        run: sudo apt-get update && sudo apt-get install -y clang-15 ninja-build cmake
       - name: Bootstrap vcpkg
         run: |
           [[ -d vcpkg ]] || git clone https://github.com/microsoft/vcpkg.git vcpkg
