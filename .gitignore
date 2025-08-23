@@ -1,0 +1,15 @@
+# CMake / vcpkg / build 产物
+build/
+vcpkg_installed/
+mini-stl/build/
+CMakeCache.txt
+CMakeFiles/
+*.a
+*.so
+*.exe
+
+# IDE / 编辑器
+.vscode/
+.idea/
+*.swp
+.DS_Store

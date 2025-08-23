@@ -13,13 +13,9 @@ default:
       - build/vcpkg_installed/
 
 before_script:
-  - apt-get update -qq && apt-get install -y clang-16 ninja-build cmake git
-  - git submodule update --init --recursive || true
-  - |
-    if [ ! -d "$VCPKG_ROOT" ]; then
-      git clone --depth=1 https://github.com/microsoft/vcpkg.git "$VCPKG_ROOT"
-      "$VCPKG_ROOT/bootstrap-vcpkg.sh"
-    fi
+  - apt-get update -qq && apt-get install -y clang-16 ninja-build cmake git pkg-config
+  - git submodule update --init --recursive
+  - $VCPKG_ROOT/bootstrap-vcpkg.sh
   - $VCPKG_ROOT/vcpkg install fmt gtest --triplet=x64-linux
 
 build:
