@@ -1,4 +1,4 @@
-stages: [build, test]
+stages: [build, test, deploy]
 
 variables:
   VCPKG_ROOT: "$CI_PROJECT_DIR/vcpkg"
