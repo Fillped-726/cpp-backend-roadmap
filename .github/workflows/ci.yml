@@ -33,12 +33,18 @@ jobs:
         run: |
           cmake -B build -G Ninja -DCMAKE_TOOLCHAIN_FILE=$VCPKG_ROOT/scripts/buildsystems/vcpkg.cmake
           cmake --build build --parallel $(nproc)
-      - name: Test
-        run: ctest --test-dir build --output-junit test_result.xml
+      - name: Build & Test mini-stl
+        run: |
+          cmake -S mini-stl -B mini-stl/build -G Ninja \
+            -DCMAKE_TOOLCHAIN_FILE=$VCPKG_ROOT/scripts/buildsystems/vcpkg.cmake \
+            -DCMAKE_BUILD_TYPE=Release
+          cmake --build mini-stl/build --parallel
+          cd mini-stl/build
+          ctest --output-on-failure --output-junit test_result.xml
+
       - name: Upload Test Report
-        uses: dorny/test-reporter@v1
-        if: success() || failure()
+        uses: actions/upload-artifact@v4
+        if: always()
         with:
-          name: Test-Report
-          path: build/test_result.xml
-          reporter: jest-junit
+          name: mini-stl-test-report
+          path: mini-stl/build/test_result.xml

@@ -1,8 +1,0 @@
-/home/sakura/text/cpp-backend-roadmap/build/CMakeFiles/app.dir
-/home/sakura/text/cpp-backend-roadmap/build/CMakeFiles/test.dir
-/home/sakura/text/cpp-backend-roadmap/build/CMakeFiles/edit_cache.dir
-/home/sakura/text/cpp-backend-roadmap/build/CMakeFiles/rebuild_cache.dir
-/home/sakura/text/cpp-backend-roadmap/build/tests/CMakeFiles/test_main.dir
-/home/sakura/text/cpp-backend-roadmap/build/tests/CMakeFiles/test.dir
-/home/sakura/text/cpp-backend-roadmap/build/tests/CMakeFiles/edit_cache.dir
-/home/sakura/text/cpp-backend-roadmap/build/tests/CMakeFiles/rebuild_cache.dir
