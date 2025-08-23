@@ -31,7 +31,9 @@ jobs:
           ./vcpkg/bootstrap-vcpkg.sh
       - name: Configure & Build
         run: |
-          cmake -B build -G Ninja -DCMAKE_TOOLCHAIN_FILE=$VCPKG_ROOT/scripts/buildsystems/vcpkg.cmake
+          # 显式指定源目录为 mini-stl
+          cmake -B build -S mini-stl -G Ninja \
+            -DCMAKE_TOOLCHAIN_FILE=$VCPKG_ROOT/scripts/buildsystems/vcpkg.cmake
           cmake --build build --parallel $(nproc)
       - name: Build & Test mini-stl
         run: |
