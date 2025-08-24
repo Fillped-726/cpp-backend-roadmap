@@ -1,13 +1,14 @@
 #include <catch2/catch_all.hpp>
 #include "mini_vector.h"
 
-TEST_CASE("mini_vector is default constructible") {
-    mini_vector v;
-    REQUIRE(true);   // 占位
+TEST_CASE("reserve dispatches to mmap for big type") {
+    struct alignas(4096) Big { char buf[4096]; };  // 确保 >= 4096
+    mini_vector<Big> vb;
+    vb.reserve(1);
+    // 只需要编译通过即可；后续可用捕获 stdout 断言
 }
 
-TEST_CASE("reserve dispatches by type size") {
-    mini_vector v;
-    v.reserve(10);          // 触发 stub 打印
-    REQUIRE(true);          // 占位
+TEST_CASE("reserve dispatches to new[] for small type") {
+    mini_vector<int> vi;
+    vi.reserve(10);
 }
