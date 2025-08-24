@@ -140,6 +140,19 @@ test_mini_vector/fast:
 .PHONY : test_mini_vector/fast
 
 #=============================================================================
+# Target rules for targets named bench_split
+
+# Build rule for target.
+bench_split: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 bench_split
+.PHONY : bench_split
+
+# fast build rule for target.
+bench_split/fast:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/bench_split.dir/build.make CMakeFiles/bench_split.dir/build
+.PHONY : bench_split/fast
+
+#=============================================================================
 # Target rules for targets named Catch2
 
 # Build rule for target.
@@ -164,6 +177,30 @@ Catch2WithMain: cmake_check_build_system
 Catch2WithMain/fast:
 	$(MAKE) $(MAKESILENT) -f _deps/catch2-build/src/CMakeFiles/Catch2WithMain.dir/build.make _deps/catch2-build/src/CMakeFiles/Catch2WithMain.dir/build
 .PHONY : Catch2WithMain/fast
+
+bench/bench_split.o: bench/bench_split.cpp.o
+.PHONY : bench/bench_split.o
+
+# target to build an object file
+bench/bench_split.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/bench_split.dir/build.make CMakeFiles/bench_split.dir/bench/bench_split.cpp.o
+.PHONY : bench/bench_split.cpp.o
+
+bench/bench_split.i: bench/bench_split.cpp.i
+.PHONY : bench/bench_split.i
+
+# target to preprocess a source file
+bench/bench_split.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/bench_split.dir/build.make CMakeFiles/bench_split.dir/bench/bench_split.cpp.i
+.PHONY : bench/bench_split.cpp.i
+
+bench/bench_split.s: bench/bench_split.cpp.s
+.PHONY : bench/bench_split.s
+
+# target to generate assembly for a file
+bench/bench_split.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/bench_split.dir/build.make CMakeFiles/bench_split.dir/bench/bench_split.cpp.s
+.PHONY : bench/bench_split.cpp.s
 
 test/catch_main.o: test/catch_main.cpp.o
 .PHONY : test/catch_main.o
@@ -224,7 +261,11 @@ help:
 	@echo "... test"
 	@echo "... Catch2"
 	@echo "... Catch2WithMain"
+	@echo "... bench_split"
 	@echo "... test_mini_vector"
+	@echo "... bench/bench_split.o"
+	@echo "... bench/bench_split.i"
+	@echo "... bench/bench_split.s"
 	@echo "... test/catch_main.o"
 	@echo "... test/catch_main.i"
 	@echo "... test/catch_main.s"

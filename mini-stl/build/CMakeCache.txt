@@ -419,6 +419,9 @@ Catch2WithMain_LIB_DEPENDS:STATIC=general;Catch2;
 //Value Computed by CMake
 Catch2_BINARY_DIR:STATIC=/home/sakura/text/cpp-backend-roadmap/mini-stl/build/_deps/catch2-build
 
+//The directory containing a CMake configuration file for Catch2.
+Catch2_DIR:PATH=Catch2_DIR-NOTFOUND
+
 //Value Computed by CMake
 Catch2_IS_TOP_LEVEL:STATIC=OFF
 
