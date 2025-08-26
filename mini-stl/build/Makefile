@@ -153,6 +153,19 @@ bench_split/fast:
 .PHONY : bench_split/fast
 
 #=============================================================================
+# Target rules for targets named visit_print
+
+# Build rule for target.
+visit_print: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 visit_print
+.PHONY : visit_print
+
+# fast build rule for target.
+visit_print/fast:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/visit_print.dir/build.make CMakeFiles/visit_print.dir/build
+.PHONY : visit_print/fast
+
+#=============================================================================
 # Target rules for targets named Catch2
 
 # Build rule for target.
@@ -201,6 +214,30 @@ bench/bench_split.s: bench/bench_split.cpp.s
 bench/bench_split.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/bench_split.dir/build.make CMakeFiles/bench_split.dir/bench/bench_split.cpp.s
 .PHONY : bench/bench_split.cpp.s
+
+bench/visit_print.o: bench/visit_print.cpp.o
+.PHONY : bench/visit_print.o
+
+# target to build an object file
+bench/visit_print.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/visit_print.dir/build.make CMakeFiles/visit_print.dir/bench/visit_print.cpp.o
+.PHONY : bench/visit_print.cpp.o
+
+bench/visit_print.i: bench/visit_print.cpp.i
+.PHONY : bench/visit_print.i
+
+# target to preprocess a source file
+bench/visit_print.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/visit_print.dir/build.make CMakeFiles/visit_print.dir/bench/visit_print.cpp.i
+.PHONY : bench/visit_print.cpp.i
+
+bench/visit_print.s: bench/visit_print.cpp.s
+.PHONY : bench/visit_print.s
+
+# target to generate assembly for a file
+bench/visit_print.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/visit_print.dir/build.make CMakeFiles/visit_print.dir/bench/visit_print.cpp.s
+.PHONY : bench/visit_print.cpp.s
 
 test/catch_main.o: test/catch_main.cpp.o
 .PHONY : test/catch_main.o
@@ -263,9 +300,13 @@ help:
 	@echo "... Catch2WithMain"
 	@echo "... bench_split"
 	@echo "... test_mini_vector"
+	@echo "... visit_print"
 	@echo "... bench/bench_split.o"
 	@echo "... bench/bench_split.i"
 	@echo "... bench/bench_split.s"
+	@echo "... bench/visit_print.o"
+	@echo "... bench/visit_print.i"
+	@echo "... bench/visit_print.s"
 	@echo "... test/catch_main.o"
 	@echo "... test/catch_main.i"
 	@echo "... test/catch_main.s"

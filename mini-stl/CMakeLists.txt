@@ -30,3 +30,6 @@ add_test(NAME mini_vector COMMAND test_mini_vector)
 # # ---- 字符串比较 ----
 add_executable(bench_split bench/bench_split.cpp)
 target_include_directories(bench_split PRIVATE include)
+
+add_executable(visit_print bench/visit_print.cpp)
+target_include_directories(visit_print PRIVATE include)
