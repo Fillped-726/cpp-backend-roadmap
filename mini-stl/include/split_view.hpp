@@ -1,10 +1,12 @@
 #pragma once
 #include <string_view>
 #include <vector>
+#include <optional>
 
-// O(n) 单次扫描，不拷贝字符
-inline std::vector<std::string_view>
+inline std::optional<std::vector<std::string_view>>
 split_view(std::string_view s, char delim) {
+    if (s.empty()) return std::nullopt;
+
     std::vector<std::string_view> out;
     std::size_t first = 0;
     while (first < s.size()) {

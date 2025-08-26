@@ -12,3 +12,14 @@ TEST_CASE("reserve dispatches to new[] for small type") {
     mini_vector<int> vi;
     vi.reserve(10);
 }
+
+TEST_CASE("mini_vector::at returns optional") {
+    mini_vector<int> v;
+    v.data_ = new int[3]{10, 20, 30};
+    v.size_ = 3;
+
+    REQUIRE(v.at(0).value() == 10);
+    REQUIRE_FALSE(v.at(10).has_value());
+
+    delete[] v.data_;
+}

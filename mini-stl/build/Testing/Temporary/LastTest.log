@@ -1,0 +1,24 @@
+Start testing: Aug 27 00:37 CST
+----------------------------------------------------------
+1/1 Testing: mini_vector
+1/1 Test: mini_vector
+Command: "/home/sakura/text/cpp-backend-roadmap/mini-stl/build/test_mini_vector"
+Directory: /home/sakura/text/cpp-backend-roadmap/mini-stl/build
+"mini_vector" start time: Aug 27 00:37 CST
+Output:
+----------------------------------------------------------
+Randomness seeded to: 3868027501
+[mmap] reserve 1 big objects
+[new[]] reserve 10 small objects
+===============================================================================
+All tests passed (2 assertions in 3 test cases)
+
+<end of output>
+Test time =   0.01 sec
+----------------------------------------------------------
+Test Passed.
+"mini_vector" end time: Aug 27 00:37 CST
+"mini_vector" time elapsed: 00:00:00
+----------------------------------------------------------
+
+End testing: Aug 27 00:37 CST
