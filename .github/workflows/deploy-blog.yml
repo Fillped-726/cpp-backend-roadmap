@@ -8,18 +8,14 @@ on:
 jobs:
   deploy:
     runs-on: ubuntu-latest
+    permissions:
+      contents: write  # 关键！允许推送代码到所有分支
     steps:
       # 1. 检出 main 分支代码
       - name: Checkout main
         uses: actions/checkout@v4
 
-      # 2. 自动创建 gh-pages 分支（如果不存在）
-      - name: Create gh-pages branch if not exists
-        run: |
-          git fetch origin gh-pages 2>/dev/null || git checkout -b gh-pages
-          git push -u origin gh-pages || true
-
-      # 3. 部署到 GitHub Pages
+      # 2. 部署到 GitHub Pages
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v3
         with:
