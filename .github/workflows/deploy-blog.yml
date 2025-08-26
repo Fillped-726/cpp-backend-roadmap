@@ -13,27 +13,17 @@ jobs:
       - name: Checkout main
         uses: actions/checkout@v4
 
-      # 2. 创建 gh-pages 分支并复制 blog 内容
-      - name: Prepare gh-pages
+      # 2. 自动创建 gh-pages 分支（如果不存在）
+      - name: Create gh-pages branch if not exists
         run: |
-          # 创建临时目录存放 gh-pages 内容
-          mkdir -p gh-pages
-          # 复制 blog 内容
-          cp -r docs/blog/* gh-pages/
+          git fetch origin gh-pages 2>/dev/null || git checkout -b gh-pages
+          git push -u origin gh-pages || true
 
-      # 3. 检出 gh-pages 分支并提交
-      - name: Commit to gh-pages
-        uses: actions/checkout@v4
+      # 3. 部署到 GitHub Pages
+      - name: Deploy to GitHub Pages
+        uses: peaceiris/actions-gh-pages@v3
         with:
-          ref: gh-pages  # 切换到 gh-pages 分支
-          token: ${{ secrets.GITHUB_TOKEN }}  # 使用 GitHub 提供的 token
-          path: gh-pages  # 将工作目录切换到 gh-pages 目录
-
-      - name: Push to gh-pages
-        run: |
-          # 添加、提交并推送 gh-pages 分支
-          git config user.name "github-actions[bot]"
-          git config user.email "github-actions[bot]@users.noreply.github.com"
-          git add .
-          git commit -m "Auto deploy blog content" || echo "No changes to commit"
-          git push origin gh-pages
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./docs/blog  # 替换为你的博客目录
+          publish_branch: gh-pages   # 确保分支名称正确
+          commit_message: "Auto deploy blog content"
