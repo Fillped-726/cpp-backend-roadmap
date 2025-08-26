@@ -1,0 +1,39 @@
+name: Deploy Blog to GitHub Pages
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      # 1. 检出 main 分支代码
+      - name: Checkout main
+        uses: actions/checkout@v4
+
+      # 2. 创建 gh-pages 分支并复制 blog 内容
+      - name: Prepare gh-pages
+        run: |
+          # 创建临时目录存放 gh-pages 内容
+          mkdir -p gh-pages
+          # 复制 blog 内容
+          cp -r docs/blog/* gh-pages/
+
+      # 3. 检出 gh-pages 分支并提交
+      - name: Commit to gh-pages
+        uses: actions/checkout@v4
+        with:
+          ref: gh-pages  # 切换到 gh-pages 分支
+          token: ${{ secrets.GITHUB_TOKEN }}  # 使用 GitHub 提供的 token
+          path: gh-pages  # 将工作目录切换到 gh-pages 目录
+
+      - name: Push to gh-pages
+        run: |
+          # 添加、提交并推送 gh-pages 分支
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add .
+          git commit -m "Auto deploy blog content" || echo "No changes to commit"
+          git push origin gh-pages
