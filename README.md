@@ -5,3 +5,7 @@
 ## 🛠️ 一键本地编译
 ```bash
 ./build.sh
+
+```markdown
+### 本周学习成果
+- [week1 完整笔记 & benchmark](https://<your-name>.github.io/mini-stl/variant_blog.html)
