@@ -1,10 +1,13 @@
 # cpp-backend-roadmap
 
-![pipeline status](https://github.com/<Fillped-726>/cpp-backend-roadmap/workflows/CI/badge.svg)
+![pipeline status](https://github.com/<Fillped-726>/cpp-backend-roadmap/workflows/CI/badge.
+svg)
+
+### 本周学习成果
+- [week1 完整笔记 & benchmark](https://<Fillped-726>.github.io/mini-stl/variant_blog.html)
 
 ## 🛠️ 一键本地编译
 ```bash
 ./build.sh
 
-### 本周学习成果
-- [week1 完整笔记 & benchmark](https://<Fillped-726>.github.io/mini-stl/variant_blog.html)
+
