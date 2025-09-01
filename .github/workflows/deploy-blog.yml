@@ -1,3 +1,4 @@
+# .github/workflows/deploy-blog.yml
 name: Deploy Blog to GitHub Pages
 
 on:
@@ -5,21 +6,33 @@ on:
     branches:
       - main
 
+permissions:
+  contents: read      # 仅需读取主分支代码
+  pages: write        # GitHub Pages 部署权限
+  id-token: write     # 用于生成JWT签名
+
 jobs:
   deploy:
     runs-on: ubuntu-latest
-    permissions:
-      contents: write  # 关键！允许推送代码到所有分支
     steps:
-      # 1. 检出 main 分支代码
-      - name: Checkout main
+      # 1. 检出代码
+      - name: Checkout code
         uses: actions/checkout@v4
 
-      # 2. 部署到 GitHub Pages
-      - name: Deploy to GitHub Pages
-        uses: peaceiris/actions-gh-pages@v3
+      # 2. 配置 Pages 环境
+      - name: Configure Pages
+        uses: actions/configure-pages@v4
+
+      # 3. 上传博客目录为 Pages artifact
+      - name: Upload blog directory
+        uses: actions/upload-pages-artifact@v3
         with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./docs/blog  # 替换为你的博客目录
-          publish_branch: gh-pages   # 确保分支名称正确
-          commit_message: "Auto deploy blog content"
+          path: docs/blog  # 确保路径与实际博客目录一致
+          # 可选：排除不需要的文件
+          # exclude: |
+          #   *.tmp
+          #   **/private/
+
+      # 4. 部署到 GitHub Pages
+      - name: Deploy to Pages
+        uses: actions/deploy-pages@v4
