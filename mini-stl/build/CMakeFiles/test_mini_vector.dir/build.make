@@ -108,8 +108,8 @@ test_mini_vector_EXTERNAL_OBJECTS =
 test_mini_vector: CMakeFiles/test_mini_vector.dir/test/catch_main.cpp.o
 test_mini_vector: CMakeFiles/test_mini_vector.dir/test/test_mini_vector.cpp.o
 test_mini_vector: CMakeFiles/test_mini_vector.dir/build.make
-test_mini_vector: _deps/catch2-build/src/libCatch2Maind.a
-test_mini_vector: _deps/catch2-build/src/libCatch2d.a
+test_mini_vector: _deps/catch2-build/src/libCatch2Main.a
+test_mini_vector: _deps/catch2-build/src/libCatch2.a
 test_mini_vector: CMakeFiles/test_mini_vector.dir/link.txt
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --bold --progress-dir=/home/sakura/text/cpp-backend-roadmap/mini-stl/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Linking CXX executable test_mini_vector"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/test_mini_vector.dir/link.txt --verbose=$(VERBOSE)

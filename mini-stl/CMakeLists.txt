@@ -1,7 +1,7 @@
 cmake_minimum_required(VERSION 3.14)
 project(mini_vector LANGUAGES CXX)
-set(CMAKE_CXX_STANDARD 17)
-
+set(CMAKE_CXX_STANDARD 20)
+set(CMAKE_CXX_STANDARD_REQUIRED ON)
 # ---- Catch2 用 FetchContent 拉取 ----
 find_package(Catch2 QUIET)
 if(NOT Catch2_FOUND)

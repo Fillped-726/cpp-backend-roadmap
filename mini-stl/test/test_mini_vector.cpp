@@ -188,3 +188,61 @@ TEST_CASE("iterator loop") {
     for (int x : v) sum += x;
     REQUIRE(sum == 100 * 99 / 2);
 }
+
+/* ---------- 1. move-only 辅助类型 ---------- */
+struct MoveOnlyNoexcept {
+    int value;
+    MoveOnlyNoexcept(int v = 0) : value(v) {}
+    MoveOnlyNoexcept(MoveOnlyNoexcept&&) noexcept = default;
+    MoveOnlyNoexcept& operator=(MoveOnlyNoexcept&&) noexcept = default;
+    bool operator==(const MoveOnlyNoexcept& o) const { return value == o.value; }
+};
+
+/* ---------- 2. 测试用例 ---------- */
+
+TEST_CASE("mini_vector works with move-only noexcept types") {
+    mini_vector<MoveOnlyNoexcept> v;
+    v.emplace_back(42);
+    v.push_back(MoveOnlyNoexcept{100});
+
+    REQUIRE(v.size() == 2);
+    REQUIRE(v.at(0)->value == 42);
+    REQUIRE(v.at(1)->value == 100);
+}
+
+TEST_CASE("reserve prints noexcept information") {
+    // 肉眼观察 stdout：应出现 “T::T(T&&) noexcept = true”
+    mini_vector<MoveOnlyNoexcept> v;
+    REQUIRE_NOTHROW(v.reserve(64));
+}
+
+TEST_CASE("pop_back returns optional value") {
+    mini_vector<MoveOnlyNoexcept> v;
+    v.emplace_back(7);
+    v.emplace_back(8);
+
+    auto opt = v.pop_back();
+    REQUIRE(opt.has_value());
+    REQUIRE(opt->value == 8);
+    REQUIRE(v.size() == 1);
+
+    opt = v.pop_back();
+    REQUIRE(opt.has_value());
+    REQUIRE(opt->value == 7);
+    REQUIRE(v.size() == 0);
+
+    REQUIRE(v.pop_back() == std::nullopt);
+}
+
+TEST_CASE("const_iterator allows read-only range-for") {
+    mini_vector<MoveOnlyNoexcept> v;
+    v.emplace_back(1);
+    v.emplace_back(2);
+    v.emplace_back(3);
+
+    int sum = 0;
+    for (const auto& x : v) {          // 使用 const_iterator
+        sum += x.value;
+    }
+    REQUIRE(sum == 6);
+}

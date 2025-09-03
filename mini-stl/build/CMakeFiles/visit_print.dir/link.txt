@@ -1,1 +1,1 @@
-/usr/bin/c++ -g CMakeFiles/visit_print.dir/bench/visit_print.cpp.o -o visit_print 
+/usr/bin/c++ -O3 -DNDEBUG CMakeFiles/visit_print.dir/bench/visit_print.cpp.o -o visit_print 
