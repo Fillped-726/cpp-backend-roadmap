@@ -1,13 +1,13 @@
-Start testing: Sep 04 00:07 CST
+Start testing: Sep 04 18:06 CST
 ----------------------------------------------------------
 1/1 Testing: mini_vector
 1/1 Test: mini_vector
 Command: "/home/sakura/text/cpp-backend-roadmap/mini-stl/build/test_mini_vector"
 Directory: /home/sakura/text/cpp-backend-roadmap/mini-stl/build
-"mini_vector" start time: Sep 04 00:07 CST
+"mini_vector" start time: Sep 04 18:06 CST
 Output:
 ----------------------------------------------------------
-Randomness seeded to: 2416631542
+Randomness seeded to: 1227736621
 [mini_vector] T::T(T&&) noexcept = true
 [mini_vector] T::T(T&&) noexcept = true
 [mini_vector] T::T(T&&) noexcept = true
@@ -44,14 +44,14 @@ Randomness seeded to: 2416631542
 [mini_vector] T::T(T&&) noexcept = true
 [mini_vector] T::T(T&&) noexcept = true
 ===============================================================================
-All tests passed (153 assertions in 20 test cases)
+All tests passed (163 assertions in 23 test cases)
 
 <end of output>
 Test time =   0.00 sec
 ----------------------------------------------------------
 Test Passed.
-"mini_vector" end time: Sep 04 00:07 CST
+"mini_vector" end time: Sep 04 18:06 CST
 "mini_vector" time elapsed: 00:00:00
 ----------------------------------------------------------
 
-End testing: Sep 04 00:07 CST
+End testing: Sep 04 18:06 CST

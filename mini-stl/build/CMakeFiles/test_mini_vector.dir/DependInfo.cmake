@@ -9,6 +9,7 @@ set(CMAKE_DEPENDS_LANGUAGES
 # The set of dependency files which are needed:
 set(CMAKE_DEPENDS_DEPENDENCY_FILES
   "/home/sakura/text/cpp-backend-roadmap/mini-stl/test/catch_main.cpp" "CMakeFiles/test_mini_vector.dir/test/catch_main.cpp.o" "gcc" "CMakeFiles/test_mini_vector.dir/test/catch_main.cpp.o.d"
+  "/home/sakura/text/cpp-backend-roadmap/mini-stl/test/test_mini_memory.cpp" "CMakeFiles/test_mini_vector.dir/test/test_mini_memory.cpp.o" "gcc" "CMakeFiles/test_mini_vector.dir/test/test_mini_memory.cpp.o.d"
   "/home/sakura/text/cpp-backend-roadmap/mini-stl/test/test_mini_vector.cpp" "CMakeFiles/test_mini_vector.dir/test/test_mini_vector.cpp.o" "gcc" "CMakeFiles/test_mini_vector.dir/test/test_mini_vector.cpp.o.d"
   )
 

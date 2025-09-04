@@ -22,6 +22,7 @@ target_include_directories(mini_vector INTERFACE include)
 add_executable(test_mini_vector
   test/catch_main.cpp
   test/test_mini_vector.cpp
+  test/test_mini_memory.cpp
 )
 target_link_libraries(test_mini_vector PRIVATE mini_vector Catch2::Catch2WithMain)
 enable_testing()

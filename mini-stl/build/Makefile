@@ -263,6 +263,30 @@ test/catch_main.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_mini_vector.dir/build.make CMakeFiles/test_mini_vector.dir/test/catch_main.cpp.s
 .PHONY : test/catch_main.cpp.s
 
+test/test_mini_memory.o: test/test_mini_memory.cpp.o
+.PHONY : test/test_mini_memory.o
+
+# target to build an object file
+test/test_mini_memory.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_mini_vector.dir/build.make CMakeFiles/test_mini_vector.dir/test/test_mini_memory.cpp.o
+.PHONY : test/test_mini_memory.cpp.o
+
+test/test_mini_memory.i: test/test_mini_memory.cpp.i
+.PHONY : test/test_mini_memory.i
+
+# target to preprocess a source file
+test/test_mini_memory.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_mini_vector.dir/build.make CMakeFiles/test_mini_vector.dir/test/test_mini_memory.cpp.i
+.PHONY : test/test_mini_memory.cpp.i
+
+test/test_mini_memory.s: test/test_mini_memory.cpp.s
+.PHONY : test/test_mini_memory.s
+
+# target to generate assembly for a file
+test/test_mini_memory.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_mini_vector.dir/build.make CMakeFiles/test_mini_vector.dir/test/test_mini_memory.cpp.s
+.PHONY : test/test_mini_memory.cpp.s
+
 test/test_mini_vector.o: test/test_mini_vector.cpp.o
 .PHONY : test/test_mini_vector.o
 
@@ -310,6 +334,9 @@ help:
 	@echo "... test/catch_main.o"
 	@echo "... test/catch_main.i"
 	@echo "... test/catch_main.s"
+	@echo "... test/test_mini_memory.o"
+	@echo "... test/test_mini_memory.i"
+	@echo "... test/test_mini_memory.s"
 	@echo "... test/test_mini_vector.o"
 	@echo "... test/test_mini_vector.i"
 	@echo "... test/test_mini_vector.s"
