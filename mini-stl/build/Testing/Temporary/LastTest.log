@@ -1,13 +1,13 @@
-Start testing: Sep 04 18:06 CST
+Start testing: Sep 10 21:47 CST
 ----------------------------------------------------------
 1/1 Testing: mini_vector
 1/1 Test: mini_vector
 Command: "/home/sakura/text/cpp-backend-roadmap/mini-stl/build/test_mini_vector"
 Directory: /home/sakura/text/cpp-backend-roadmap/mini-stl/build
-"mini_vector" start time: Sep 04 18:06 CST
+"mini_vector" start time: Sep 10 21:47 CST
 Output:
 ----------------------------------------------------------
-Randomness seeded to: 1227736621
+Randomness seeded to: 2081356177
 [mini_vector] T::T(T&&) noexcept = true
 [mini_vector] T::T(T&&) noexcept = true
 [mini_vector] T::T(T&&) noexcept = true
@@ -43,15 +43,37 @@ Randomness seeded to: 1227736621
 [mini_vector] T::T(T&&) noexcept = true
 [mini_vector] T::T(T&&) noexcept = true
 [mini_vector] T::T(T&&) noexcept = true
+[mini_vector] T::T(T&&) noexcept = true
+[mini_vector] T::T(T&&) noexcept = true
+[mini_vector] T::T(T&&) noexcept = true
+[mini_vector] T::T(T&&) noexcept = true
+[mini_vector] T::T(T&&) noexcept = true
+[mini_vector] T::T(T&&) noexcept = true
+[mini_vector] T::T(T&&) noexcept = true
+[mini_vector] T::T(T&&) noexcept = true
+[mini_vector] T::T(T&&) noexcept = true
+[mini_vector] T::T(T&&) noexcept = true
+[mini_vector] T::T(T&&) noexcept = true
+[mini_vector] T::T(T&&) noexcept = true
+[mini_vector] T::T(T&&) noexcept = true
+[mini_vector] T::T(T&&) noexcept = true
+[mini_vector] T::T(T&&) noexcept = true
+[mini_vector] T::T(T&&) noexcept = true
+[mini_vector] T::T(T&&) noexcept = true
+[mini_vector] T::T(T&&) noexcept = true
+[mini_vector] T::T(T&&) noexcept = true
+[mini_vector] T::T(T&&) noexcept = true
+[mini_vector] T::T(T&&) noexcept = true
+[mini_vector] T::T(T&&) noexcept = true
 ===============================================================================
-All tests passed (163 assertions in 23 test cases)
+All tests passed (181 assertions in 26 test cases)
 
 <end of output>
 Test time =   0.00 sec
 ----------------------------------------------------------
 Test Passed.
-"mini_vector" end time: Sep 04 18:06 CST
+"mini_vector" end time: Sep 10 21:47 CST
 "mini_vector" time elapsed: 00:00:00
 ----------------------------------------------------------
 
-End testing: Sep 04 18:06 CST
+End testing: Sep 10 21:47 CST

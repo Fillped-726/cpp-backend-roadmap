@@ -1,2 +1,2 @@
-mini_vector 5 0.000418122
+mini_vector 7 0.000395406
 ---

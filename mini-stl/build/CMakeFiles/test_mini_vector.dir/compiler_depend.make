@@ -1366,6 +1366,7 @@ CMakeFiles/test_mini_vector.dir/test/test_mini_vector.cpp.o: /home/sakura/text/c
   /usr/include/c++/13/locale \
   /usr/include/c++/13/map \
   /usr/include/c++/13/memory \
+  /usr/include/c++/13/memory_resource \
   /usr/include/c++/13/new \
   /usr/include/c++/13/numbers \
   /usr/include/c++/13/numeric \
@@ -1379,6 +1380,7 @@ CMakeFiles/test_mini_vector.dir/test/test_mini_vector.cpp.o: /home/sakura/text/c
   /usr/include/c++/13/random \
   /usr/include/c++/13/ratio \
   /usr/include/c++/13/set \
+  /usr/include/c++/13/shared_mutex \
   /usr/include/c++/13/span \
   /usr/include/c++/13/sstream \
   /usr/include/c++/13/stdexcept \
@@ -1555,6 +1557,10 @@ CMakeFiles/test_mini_vector.dir/test/test_mini_vector.cpp.o: /home/sakura/text/c
   /usr/lib/gcc/x86_64-linux-gnu/13/include/stdint.h \
   /usr/lib/gcc/x86_64-linux-gnu/13/include/syslimits.h
 
+
+/usr/include/c++/13/shared_mutex:
+
+/usr/include/c++/13/memory_resource:
 
 /usr/include/c++/13/iostream:
 

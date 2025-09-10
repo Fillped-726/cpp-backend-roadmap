@@ -246,3 +246,124 @@ TEST_CASE("const_iterator allows read-only range-for") {
     }
     REQUIRE(sum == 6);
 }
+
+static std::size_t g_sys_alloc_count = 0;
+void* operator new(std::size_t sz) {
+    g_sys_alloc_count++;
+    return std::malloc(sz);
+}
+void operator delete(void* ptr) noexcept {
+    std::free(ptr);
+}
+// 重置计数器的辅助函数
+void reset_sys_alloc_count() {
+    g_sys_alloc_count = 0;
+}
+std::size_t get_sys_alloc_count() {
+    return g_sys_alloc_count;
+}
+
+
+TEST_CASE("mini_vector PMR - Monotonic Buffer Avoids System Alloc", "[pmr]") {
+    reset_sys_alloc_count();
+    const std::size_t buffer_size = 1 << 20; // 1MB
+    char buf[buffer_size];
+    std::pmr::monotonic_buffer_resource pool(buf, buffer_size);
+
+    // 使用 PMR 构造 mini_vector
+    mini_vector<int, std::pmr::polymorphic_allocator<int>> vec(&pool);
+
+    const std::size_t num_elements = 10000;
+    // 预计算所需内存大小 (粗略估计)
+    const std::size_t estimated_bytes_needed = num_elements * sizeof(int);
+
+    // 确保缓冲区足够大
+    REQUIRE(buffer_size > estimated_bytes_needed);
+
+    // 执行 reserve 操作
+    vec.reserve(num_elements);
+
+    // 检查是否没有发生系统级分配
+    // 因为所有内存都应来自预分配的 buf
+    REQUIRE(get_sys_alloc_count() == 0);
+
+    // 可选：添加一些元素验证功能正常
+    for (std::size_t i = 0; i < num_elements / 2; ++i) {
+        vec.push_back(static_cast<int>(i));
+    }
+    REQUIRE(vec.size() == num_elements / 2);
+    REQUIRE(vec.capacity() >= num_elements);
+    // 再次确认 push_back 也没有触发系统分配 (取决于实现，但通常不会)
+    REQUIRE(get_sys_alloc_count() == 0);
+}
+
+TEST_CASE("mini_vector PMR - Falls Back to System Alloc", "[pmr]") {
+    reset_sys_alloc_count();
+
+    // 不提供自定义内存资源，使用默认分配器 (通常链接到 new/delete)
+    mini_vector<int, std::pmr::polymorphic_allocator<int>> vec;
+
+    const std::size_t num_elements = 10000;
+    // 执行 reserve 操作，预计将触发系统分配
+    vec.reserve(num_elements);
+
+    // 检查是否发生了系统级分配
+    CHECK_NOTHROW(vec.reserve(num_elements)); // 至少有一次分配
+
+    // 重置并测试 push_back 导致的扩容
+    reset_sys_alloc_count();
+    mini_vector<int, std::pmr::polymorphic_allocator<int>> vec2;
+    // 先放入一些元素，使其接近默认容量（假设小于10000）
+    for(int i = 0; i < 100; ++i) {
+        vec2.push_back(i);
+    }
+    reset_sys_alloc_count(); // 重置计数，忽略初始分配
+    // 触发扩容
+    vec2.reserve(5000); // 这应该需要重新分配
+
+}
+
+TEST_CASE("mini_vector PMR - Move Semantics with PMR", "[pmr][move]") {
+    reset_sys_alloc_count();
+    const std::size_t buffer_size = 1 << 16; // 64KB
+    char buf[buffer_size];
+    std::pmr::monotonic_buffer_resource pool(buf, buffer_size);
+
+    using PMRVector = mini_vector<int, std::pmr::polymorphic_allocator<int>>;
+    PMRVector vec1(&pool);
+
+    const std::size_t num_elements = 1000;
+    for (int i = 0; i < static_cast<int>(num_elements); ++i) {
+        vec1.push_back(i);
+    }
+    REQUIRE(vec1.size() == num_elements);
+    REQUIRE(get_sys_alloc_count() == 0); // 确认内存来自池
+
+    // 测试移动构造
+    reset_sys_alloc_count(); // 移动不应分配新内存
+    PMRVector vec2(std::move(vec1));
+
+    // 原 vec1 应该为空
+    REQUIRE(vec1.size() == 0);
+    REQUIRE(vec1.data() == nullptr);
+    // 新 vec2 应该拥有数据
+    REQUIRE(vec2.size() == num_elements);
+    REQUIRE(vec2.data() != nullptr);
+    // 移动过程不应触发系统分配
+    REQUIRE(get_sys_alloc_count() == 0);
+
+    // 测试移动赋值
+    reset_sys_alloc_count();
+    PMRVector vec3; // 使用默认分配器
+    vec3 = std::move(vec2);
+    reset_sys_alloc_count(); // 重置，关注移动赋值
+
+    // vec2 应该为空
+    REQUIRE(vec2.size() == 0);
+    REQUIRE(vec2.data() == nullptr);
+    REQUIRE(vec3.size() == num_elements);
+    if (!vec3.empty()) {
+        REQUIRE(vec3.at(0).value() == 0);
+        REQUIRE(vec3.at(num_elements - 1).value() == static_cast<int>(num_elements - 1));
+    }
+}
